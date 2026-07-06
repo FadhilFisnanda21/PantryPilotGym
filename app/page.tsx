@@ -789,8 +789,8 @@ export default function Home() {
             <h1>Turn Your Fridge Into a Personal Nutrition Coach</h1>
             <p className="lede">Snap a photo of your fridge and get healthy meals tailored to weight loss, muscle gain, or everyday healthy eating.</p>
             <div className="hero-actions">
-              <a className="button primary" href="#scanner">Start Free</a>
-              <a className="button secondary" href="#demo">View demo recipes</a>
+              <a className="button primary" href="#scanner" style={{ minHeight: "44px", padding: "0.6rem 1.5rem", fontSize: "0.95rem" }}>Start Free →</a>
+              <a className="button ghost" href="#demo" style={{ minHeight: "44px", padding: "0.6rem 1.25rem", fontSize: "0.95rem" }}>View demo recipes</a>
             </div>
           </div>
           <div className="hero-panel" aria-label="Nutrition summary preview">
@@ -1256,9 +1256,46 @@ function MarketingSections() {
           <h2>Start free, upgrade when it becomes a habit</h2>
         </div>
         <div className="pricing-grid">
-          <article><h3>Free</h3><strong>$0</strong><p>3 scans per day and saved recipes.</p></article>
-          <article className="featured"><h3>Pro</h3><strong>$9/mo</strong><p>Unlimited scans, grocery lists, and weekly meal plans.</p></article>
-          <article><h3>Premium</h3><strong>$19/mo</strong><p>Nutrition tracking, goal coaching, and weekly reports.</p></article>
+          <article>
+            <p className="eyebrow" style={{ marginBottom: "0.75rem" }}>Free</p>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "0.25rem", marginBottom: "0.25rem" }}>
+              <strong style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--ink)" }}>$0</strong>
+            </div>
+            <p style={{ fontSize: "0.8rem", marginBottom: "1.25rem" }}>Perfect to get started</p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> 3 fridge scans per day</li>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Save up to 9 recipes</li>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Basic nutrition tracking</li>
+            </ul>
+          </article>
+          <article className="featured">
+            <p className="eyebrow" style={{ marginBottom: "0.75rem" }}>Pro</p>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "0.25rem", marginBottom: "0.25rem" }}>
+              <strong style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--ink)" }}>$9</strong>
+              <span style={{ fontSize: "0.9rem", color: "var(--ink-muted)", fontWeight: 500 }}>/mo</span>
+            </div>
+            <p style={{ fontSize: "0.8rem", marginBottom: "1.25rem" }}>For consistent healthy eating</p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Unlimited fridge scans</li>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Weekly meal plans</li>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Smart grocery lists</li>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> AI Nutrition Coach</li>
+            </ul>
+          </article>
+          <article>
+            <p className="eyebrow" style={{ marginBottom: "0.75rem" }}>Premium</p>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "0.25rem", marginBottom: "0.25rem" }}>
+              <strong style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--ink)" }}>$19</strong>
+              <span style={{ fontSize: "0.9rem", color: "var(--ink-muted)", fontWeight: 500 }}>/mo</span>
+            </div>
+            <p style={{ fontSize: "0.8rem", marginBottom: "1.25rem" }}>Serious about your goals</p>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Everything in Pro</li>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Weight progress tracking</li>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Personalized recommendations</li>
+              <li style={{ fontSize: "0.875rem", color: "var(--ink-muted)", display: "flex", gap: "0.5rem" }}><span style={{ color: "var(--green)", fontWeight: 700 }}>✓</span> Goal coaching & analytics</li>
+            </ul>
+          </article>
         </div>
       </section>
 
@@ -1267,19 +1304,63 @@ function MarketingSections() {
           <p className="eyebrow">FAQ</p>
           <h2>Common questions</h2>
         </div>
-        <details>
-          <summary>Does this connect to Gemini today?</summary>
-          <p>The Next.js API route is ready for Gemini credentials. Without an API key, the app uses local sample detection.</p>
-        </details>
-        <details>
-          <summary>Can users save recipes?</summary>
-          <p>This React MVP keeps saved recipes in session state. The next database step is Supabase persistence per account.</p>
-        </details>
-        <details>
-          <summary>What is the north star metric?</summary>
-          <p>Weekly active users generating recipes.</p>
-        </details>
+        <div className="faq">
+          <details className="faq-item">
+            <summary>Does this connect to Gemini AI?</summary>
+            <p>Yes — PantryPilot uses Google Gemini Vision to analyze fridge photos and generate personalized recipes. Your API key is stored securely as an environment variable.</p>
+          </details>
+          <details className="faq-item">
+            <summary>Can I save my recipes?</summary>
+            <p>Yes. Sign in with a magic link and your saved recipes, meal plans, and weight logs are stored securely in your account via Supabase.</p>
+          </details>
+          <details className="faq-item">
+            <summary>How does the AI Nutrition Coach work?</summary>
+            <p>The coach is powered by Gemini and knows your goal, height, weight, and saved recipes. It gives personalized advice tailored to your specific profile — not generic tips.</p>
+          </details>
+          <details className="faq-item">
+            <summary>Is my data private?</summary>
+            <p>Yes. All data is stored in your own Supabase project with row-level security enabled. Only you can access your recipes, meal plans, and health data.</p>
+          </details>
+          <details className="faq-item">
+            <summary>What is the north star metric?</summary>
+            <p>Weekly active users generating recipes. Secondary metrics include daily scans, saved recipes per user, and subscription conversion rate.</p>
+          </details>
+        </div>
       </section>
+
+      <footer style={{
+        borderTop: "1px solid var(--border-muted)",
+        padding: "2.5rem clamp(1rem, 5vw, 4.5rem)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flexWrap: "wrap",
+        gap: "1rem"
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <span style={{
+            background: "var(--green)",
+            borderRadius: "6px",
+            color: "#fff",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "24px",
+            height: "24px",
+            fontSize: "0.7rem",
+            fontWeight: 900
+          }}>P</span>
+          <span style={{ fontWeight: 700, fontSize: "0.9rem", color: "var(--ink)", letterSpacing: "-0.01em" }}>PantryPilot</span>
+        </div>
+        <p style={{ fontSize: "0.8rem", color: "var(--ink-subtle)", margin: 0 }}>
+          © {new Date().getFullYear()} PantryPilot. Turn your fridge into a personal nutrition coach.
+        </p>
+        <nav style={{ display: "flex", gap: "1.25rem" }}>
+          <a href="#how" style={{ fontSize: "0.8rem", color: "var(--ink-muted)" }}>How it works</a>
+          <a href="#pricing" style={{ fontSize: "0.8rem", color: "var(--ink-muted)" }}>Pricing</a>
+          <a href="#faq" style={{ fontSize: "0.8rem", color: "var(--ink-muted)" }}>FAQ</a>
+        </nav>
+      </footer>
     </>
   );
 }

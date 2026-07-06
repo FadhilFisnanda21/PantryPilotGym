@@ -172,6 +172,8 @@ export default function Home() {
   const [authUser, setAuthUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [authStatus, setAuthStatus] = useState<string | null>(null);
   const [generatedRecipes, setGeneratedRecipes] = useState<MatchedRecipe[] | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -529,18 +531,33 @@ export default function Home() {
 
   async function signInWithEmail(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setAuthStatus("Sending magic link...");
     const supabase = getBrowserSupabase();
     if (!supabase) {
       setAuthStatus("Unable to initialize Supabase client.");
       return;
     }
 
-    const { error } = await supabase.auth.signInWithOtp({ email });
-    if (error) {
-      setAuthStatus(`Magic link send failed: ${error.message}`);
+    if (!email || !password) {
+      setAuthStatus("Please enter your email and password.");
+      return;
+    }
+
+    setAuthStatus(authMode === "signin" ? "Signing in..." : "Creating account...");
+
+    if (authMode === "signup") {
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        setAuthStatus(`Sign up failed: ${error.message}`);
+      } else {
+        setAuthStatus("Account created! You are now signed in.");
+      }
     } else {
-      setAuthStatus(`Check ${email} for your magic link.`);
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        setAuthStatus(`Sign in failed: ${error.message}`);
+      } else {
+        setAuthStatus("Signed in successfully.");
+      }
     }
   }
 
@@ -548,6 +565,7 @@ export default function Home() {
     const supabase = getBrowserSupabase();
     if (!supabase) return;
     await supabase.auth.signOut();
+    setPassword("");
     setAuthStatus("Signed out.");
   }
 
@@ -857,7 +875,9 @@ export default function Home() {
                   </div>
                 ) : (
                   <form onSubmit={signInWithEmail} className="auth-form">
-                    <label htmlFor="auth-email">Sign in to sync saved recipes</label>
+                    <label htmlFor="auth-email">
+                      {authMode === "signin" ? "Sign in to sync your data" : "Create a free account"}
+                    </label>
                     <input
                       id="auth-email"
                       type="email"
@@ -866,7 +886,28 @@ export default function Home() {
                       onChange={(event) => setEmail(event.target.value)}
                       required
                     />
-                    <button className="button secondary full" type="submit">Send magic link</button>
+                    <input
+                      id="auth-password"
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      required
+                    />
+                    <button className="button primary full" type="submit">
+                      {authMode === "signin" ? "Sign In" : "Create Account"}
+                    </button>
+                    <button
+                      className="button ghost full"
+                      type="button"
+                      onClick={() => {
+                        setAuthMode(authMode === "signin" ? "signup" : "signin");
+                        setAuthStatus(null);
+                      }}
+                      style={{ fontSize: "0.8rem", marginTop: "-0.25rem" }}
+                    >
+                      {authMode === "signin" ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
+                    </button>
                   </form>
                 )}
                 {authStatus ? <p className="auth-status">{authStatus}</p> : null}

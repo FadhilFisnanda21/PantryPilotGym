@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PantryPilot AI Nutrition Coach</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#app" aria-label="PantryPilot home">
+        <span class="brand-mark">P</span>
+        <span>PantryPilot</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#how">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="app">
+        <div class="hero-copy">
+          <p class="eyebrow">AI Nutrition Coach</p>
+          <h1>Turn Your Fridge Into a Personal Nutrition Coach</h1>
+          <p class="lede">Snap a photo of your fridge and get healthy meals tailored to weight loss, muscle gain, or everyday healthy eating.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#scanner">Start Free</a>
+            <a class="button secondary" href="#demo">View demo recipes</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Nutrition summary preview">
+          <div class="macro-ring">
+            <strong>42g</strong>
+            <span>protein</span>
+          </div>
+          <div>
+            <p class="panel-title">Tonight's match</p>
+            <h2>High-Protein Chickpea Bowl</h2>
+            <p>Uses chickpeas, spinach, eggs, tomatoes, and yogurt already detected in your kitchen.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace" id="scanner">
+        <div class="section-heading">
+          <p class="eyebrow">MVP Flow</p>
+          <h2>Scan, choose a goal, get meals</h2>
+        </div>
+
+        <div class="app-grid">
+          <section class="tool-panel">
+            <label class="upload-zone" for="fridge-photo">
+              <input id="fridge-photo" type="file" accept="image/*">
+              <img class="photo-preview" id="photo-preview" alt="">
+              <span class="upload-icon" id="upload-icon">+</span>
+              <strong id="upload-title">Upload fridge photo</strong>
+              <small id="upload-note">Adds a sample detection set until Gemini is connected</small>
+            </label>
+
+            <div class="control-group">
+              <label for="goal">Goal</label>
+              <select id="goal">
+                <option value="weight-loss">Weight Loss</option>
+                <option value="muscle-gain">Muscle Gain</option>
+                <option value="healthy-eating">Healthy Eating</option>
+              </select>
+            </div>
+
+            <form class="ingredient-form" id="ingredient-form">
+              <label for="ingredient-input">Add ingredients</label>
+              <div class="input-row">
+                <input id="ingredient-input" type="text" placeholder="Example: tofu, rice, avocado">
+                <button class="button secondary" type="submit">Add</button>
+              </div>
+            </form>
+
+            <button class="button primary full" id="analyze-button" type="button">Generate Recipes</button>
+
+            <div class="detected">
+              <div class="mini-heading">
+                <h3>Your Ingredients</h3>
+                <button class="text-button" id="reset-button" type="button">Reset</button>
+              </div>
+              <ul class="ingredient-list" id="ingredient-list"></ul>
+            </div>
+          </section>
+
+          <section class="results" id="demo">
+            <div class="mini-heading">
+              <h3>Recommended Recipes</h3>
+              <span id="recipe-count">0 matches</span>
+            </div>
+            <p class="status-line" id="status-line">Add ingredients or upload a photo to build your first nutrition plan.</p>
+            <div class="recipe-grid" id="recipe-grid"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="saved-section">
+        <div class="section-heading">
+          <p class="eyebrow">Saved Recipes</p>
+          <h2>Keep the meals worth repeating</h2>
+        </div>
+        <div class="saved-list" id="saved-list"></div>
+      </section>
+
+      <section class="saved-section grocery-section">
+        <div class="section-heading">
+          <p class="eyebrow">Grocery List</p>
+          <h2>Buy only what your meals are missing</h2>
+        </div>
+        <div class="grocery-list" id="grocery-list"></div>
+      </section>
+
+      <section class="saved-section tracker-section">
+        <div class="section-heading">
+          <p class="eyebrow">Daily Tracker</p>
+          <h2>Track today's nutrition progress</h2>
+        </div>
+        <div class="tracker-grid">
+          <article class="tracker-card">
+            <span>Calories</span>
+            <strong id="tracker-calories">0</strong>
+            <small>target 2,000</small>
+          </article>
+          <article class="tracker-card">
+            <span>Protein</span>
+            <strong id="tracker-protein">0g</strong>
+            <small>target 130g</small>
+          </article>
+          <article class="tracker-card">
+            <span>Carbs</span>
+            <strong id="tracker-carbs">0g</strong>
+            <small>daily total</small>
+          </article>
+          <article class="tracker-card">
+            <span>Fat</span>
+            <strong id="tracker-fat">0g</strong>
+            <small>daily total</small>
+          </article>
+        </div>
+        <div class="tracker-actions">
+          <button class="button secondary" id="water-button" type="button">Add Water</button>
+          <button class="button secondary danger-button" id="reset-tracker-button" type="button">Reset Today</button>
+          <span id="tracker-water">0 glasses water</span>
+        </div>
+        <div class="meal-log" id="meal-log"></div>
+      </section>
+
+      <section class="content-band" id="how">
+        <div class="section-heading">
+          <p class="eyebrow">How It Works</p>
+          <h2>From fridge photo to goal-aligned dinner</h2>
+        </div>
+        <div class="steps">
+          <article>
+            <span>1</span>
+            <h3>Scan</h3>
+            <p>Upload a fridge photo and identify usable ingredients.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Personalize</h3>
+            <p>Choose weight loss, muscle gain, or healthy eating.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Cook</h3>
+            <p>Get recipes with macros and missing ingredients.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-band benefits">
+        <div>
+          <p class="eyebrow">Positioning</p>
+          <h2>Not another recipe generator</h2>
+        </div>
+        <p>PantryPilot is built as a nutrition-first workflow for people who want to lose weight, build muscle, eat healthier, and reduce food waste with ingredients they already own.</p>
+      </section>
+
+      <section class="content-band" id="pricing">
+        <div class="section-heading">
+          <p class="eyebrow">Pricing</p>
+          <h2>Start free, upgrade when it becomes a habit</h2>
+        </div>
+        <div class="pricing-grid">
+          <article>
+            <h3>Free</h3>
+            <strong>$0</strong>
+            <p>3 scans per day and saved recipes.</p>
+          </article>
+          <article class="featured">
+            <h3>Pro</h3>
+            <strong>$9/mo</strong>
+            <p>Unlimited scans, grocery lists, and weekly meal plans.</p>
+          </article>
+          <article>
+            <h3>Premium</h3>
+            <strong>$19/mo</strong>
+            <p>Nutrition tracking, goal coaching, and weekly reports.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-band faq" id="faq">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2>Common questions</h2>
+        </div>
+        <details>
+          <summary>Does this connect to Gemini today?</summary>
+          <p>This MVP includes the frontend workflow and API-ready data structures. The next step is adding Next.js API routes and Gemini credentials.</p>
+        </details>
+        <details>
+          <summary>Can users save recipes?</summary>
+          <p>Yes. Saved recipes are stored locally in the browser in this first version.</p>
+        </details>
+        <details>
+          <summary>What is the north star metric?</summary>
+          <p>Weekly active users generating recipes.</p>
+        </details>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

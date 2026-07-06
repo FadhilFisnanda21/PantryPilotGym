@@ -1,0 +1,56 @@
+# PantryPilot AI Nutrition Coach — Project Rules
+
+## Context
+PantryPilot adalah platform AI nutrition yang mengubah foto isi kulkas jadi rekomendasi
+resep sesuai goal kesehatan user (turun berat badan, bangun otot, makan sehat).
+PRD lengkap ada di: .claude/prds/pantrypilot.prd.md — baca dulu sebelum mulai task apa pun.
+
+## Tech Stack
+- Frontend: Next.js 15 (App Router), React 19, TailwindCSS, TypeScript
+- Backend: Next.js API Routes
+- Database: Supabase PostgreSQL
+- Auth: Supabase Auth
+- AI: Gemini Vision (analisis foto kulkas) + Gemini Text Generation (generate resep)
+- Hosting: Vercel
+
+## Database Schema (jangan ubah struktur tanpa konfirmasi)
+- profiles: id, email, goal, height, weight, created_at
+- recipes: id, user_id, title, calories, protein, carbs, fat, instructions
+- recipe_ingredients: id, recipe_id, ingredient_name, amount, is_missing
+- meal_plans: id, user_id, week_start, plan_data
+
+## API Routes
+- POST /api/analyze-fridge — input: image → output: ingredients[]
+- POST /api/generate-recipe — input: ingredients, goal → output: recipes[]
+- POST /api/save-recipe — input: recipe → output: success
+- GET /api/meal-plan — output: weekly plan
+
+## Coding Style
+- TypeScript strict mode, hindari `any`
+- Pakai functional components + hooks, bukan class component
+- Pisahkan logic Gemini API ke folder lib/ai/, jangan campur di route handler
+- Pakai async/await, bukan .then() chaining
+- Nama file: kebab-case untuk file, PascalCase untuk component
+
+## Security (WAJIB)
+- JANGAN PERNAH hardcode API key (Gemini, Supabase) di kode — selalu pakai environment variable
+- Gemini API key dan Supabase service role key HARUS di .env.local, dan .env.local HARUS ada di .gitignore
+- Semua input dari fridge photo upload harus divalidasi (tipe file, ukuran) sebelum dikirim ke Gemini
+- Pakai Supabase RLS (Row Level Security) untuk semua tabel yang ada user_id
+- Jangan expose service role key ke client-side, hanya boleh dipakai di server (API routes)
+
+## Testing
+- Tulis test untuk setiap API route baru (terutama /api/analyze-fridge dan /api/generate-recipe)
+- Test edge case: foto blur, foto tanpa makanan terdeteksi, response Gemini yang gagal di-parse JSON
+
+## Workflow
+- Sebelum implementasi fitur baru, jelaskan dulu rencana implementasi (langkah-langkah) dan
+  tunggu konfirmasi user sebelum mulai nulis kode
+- Setelah selesai satu fitur, jalankan `npm run lint` dan `npm run build` untuk pastikan tidak error
+- Jangan modifikasi skema database yang sudah ada tanpa menyebutkan dampaknya dulu
+
+## Roadmap Priority (ikuti urutan ini)
+Phase 1 (MVP — fokus sekarang): Authentication, Fridge Scanner, Recipe Generation,
+Nutrition Analysis, Save Recipes
+Phase 2 (belum dikerjakan): Weekly Meal Plans, Grocery Lists, Diet Profiles
+Phase 3 (belum dikerjakan): Weight Tracking, AI Nutrition Coach, Personalized Recommendations

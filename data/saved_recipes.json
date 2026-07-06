@@ -1,0 +1,90 @@
+[
+  {
+    "title": "Tomato Egg Protein Bowl",
+    "goals": [
+      "weight-loss"
+    ],
+    "calories": 360,
+    "protein": 33,
+    "carbs": 21,
+    "fat": 15,
+    "ingredients": [
+      "eggs",
+      "tomatoes",
+      "spinach",
+      "cottage cheese"
+    ],
+    "instructions": "Cook tomatoes into a quick sauce, add spinach, top with eggs, and serve with cottage cheese.",
+    "have": [
+      "eggs",
+      "tomatoes",
+      "spinach"
+    ],
+    "need": [
+      "cottage cheese"
+    ],
+    "score": 75
+  },
+  {
+    "title": "Low-Calorie Tofu & Broccoli Stir-Fry",
+    "goals": [
+      "weight-loss"
+    ],
+    "calories": 215,
+    "protein": 16,
+    "carbs": 18,
+    "fat": 9,
+    "instructions": "1. Press the tofu to remove excess water, then cut into bite-sized cubes. 2. Chop the broccoli, carrot, and red bell pepper. 3. Heat a non-stick pan over medium heat (use a splash of water or light cooking spray to keep it weight-loss friendly). 4. Add the carrot and broccoli, cooking for about 5 minutes until slightly tender. 5. Add the red bell pepper and tofu cubes, sautéing for another 5 minutes until the tofu is lightly browned. 6. Stir in the spinach until wilted. 7. Season with a squeeze of fresh lemon juice, salt, and pepper before serving.",
+    "ingredients": [
+      "tofu",
+      "broccoli",
+      "carrot",
+      "red bell pepper",
+      "spinach",
+      "lemon",
+      "salt",
+      "black pepper",
+      "cooking spray"
+    ],
+    "have": [
+      "tofu",
+      "broccoli",
+      "carrot",
+      "red bell pepper",
+      "spinach",
+      "lemon"
+    ],
+    "need": [
+      "salt",
+      "black pepper",
+      "cooking spray"
+    ],
+    "score": 67
+  },
+  {
+    "title": "Tomato Egg Protein Bowl",
+    "goals": [
+      "weight-loss"
+    ],
+    "calories": 360,
+    "protein": 33,
+    "carbs": 21,
+    "fat": 15,
+    "ingredients": [
+      "eggs",
+      "tomatoes",
+      "spinach",
+      "cottage cheese"
+    ],
+    "instructions": "Cook tomatoes into a quick sauce, add spinach, top with eggs, and serve with cottage cheese.",
+    "have": [
+      "eggs",
+      "tomatoes",
+      "spinach"
+    ],
+    "need": [
+      "cottage cheese"
+    ],
+    "score": 75
+  }
+]
